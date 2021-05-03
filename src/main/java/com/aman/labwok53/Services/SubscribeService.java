@@ -36,8 +36,8 @@ public class SubscribeService {
             this.subscribeRepositories.deleteByEmailAndEmail(email, subscribeId);
         }
 
-        public List<SubscribeDto> getAllSub(String email){
-            subscribeRepositories.f
+        public List<Subscribe> getAllSubByEmail(String email){
+            return subscribeRepositories.findByEmail(email);
         }
 
 

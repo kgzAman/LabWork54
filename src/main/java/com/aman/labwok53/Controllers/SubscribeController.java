@@ -9,17 +9,20 @@ import com.aman.labwok53.Exeptions.ResourceNotFoundException;
 import com.aman.labwok53.Services.EventService;
 import com.aman.labwok53.Services.SubscribeService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(path = "/api/subscribe")
 public class SubscribeController {
+    private static  final ModelMapper modelMapper = new ModelMapper();
 
     @Autowired
     private final SubscribeService subscribeService;
@@ -61,10 +64,12 @@ public class SubscribeController {
     }
 
     @GetMapping("/{email}")
-    public List<SubscribeDto> getSubscribesByEmail(@PathVariable String email){
-        List<SubscribeDto> allSubByEmail = this.subscribeService.getAllSub( email);
-        return null;
+    public List<SubscribeDto> getAllSubByEmail(@PathVariable String email){
+        return this.subscribeService.getAllSub(email)
+                .stream().map(Subscribe->modelMapper.map(Subscribe,SubscribeDto.class))
+                .collect(Collectors.toList());
     }
+
 
 
 }

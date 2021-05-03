@@ -13,7 +13,7 @@ public interface SubscribeRepositories extends MongoRepository<Subscribe,String>
     Optional<Subscribe> findByEventAndEmail(Event event , String email);
     void deleteByEmailAndEmail(String email, String subscribeId);
 
-    List<>
+    List<Subscribe>findByEmail(String email);
 
 
 }
