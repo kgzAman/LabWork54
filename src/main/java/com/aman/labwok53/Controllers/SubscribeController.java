@@ -62,7 +62,7 @@ public class SubscribeController {
 
     @GetMapping("/{email}")
     public List<SubscribeDto> getSubscribesByEmail(@PathVariable String email){
-        this.subscribeService.getAll(@PathVariable String e)
+        this.subscribeService.getAll(@PathVariable String email)
     }
 
 }
