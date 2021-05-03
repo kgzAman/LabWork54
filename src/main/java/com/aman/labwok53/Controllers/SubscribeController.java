@@ -28,10 +28,10 @@ public class SubscribeController {
     private final EventService eventService;
 
     @PostMapping
-    public SubscribeDto subscrib(@RequestBody SubscribeCreatDto subscribeCreatDto) {
+    public SubscribeDto subscribe(@RequestBody SubscribeCreatDto subscribeCreatDto) {
 
         Event event = this.eventService.findById(subscribeCreatDto.getEventId())
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Not found event with ID:%s"), subscribeCreatDto.getEventId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Not found event with ID:%s", subscribeCreatDto.getEventId()));
 
         final Optional<Subscribe> byEventAndEmail = this.subscribeService.findByEventAndEmail(event, subscribeCreatDto.getEmail());
 
@@ -55,14 +55,14 @@ public class SubscribeController {
 
 
     @DeleteMapping("/{email}")
-    public void delete(@PathVariable String email, @PathVariable SubscribeDto subscribeID){
+    public void delete(@PathVariable String email, @PathVariable String subscribeID){
         this.subscribeService.delete(email,subscribeID);
 
     }
 
     @GetMapping("/{email}")
     public List<SubscribeDto> getSubscribesByEmail(@PathVariable String email){
-        List<SubscribeDto> allSubByEmail = this.subscribeService.getAll( email);
+        List<SubscribeDto> allSubByEmail = this.subscribeService.getAllSub( email);
         return null;
     }
 

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,12 +29,15 @@ public class SubscribeService {
         }
 
         public Optional<Subscribe> findByEventAndEmail(Event event, String email){
-            final Optional<Subscribe> byEventAndEmail =this.subscribeRepositories.findByEventAndEmail(event, email);
-            return byEventAndEmail;
+            return this.subscribeRepositories.findByEventAndEmail(event, email);
         }
 
-        public void delete(String email, SubscribeDto subscribeId){
-            this.subscribeRepositories.deleteByEmailAndEmail(email,subscribeId);
+        public void delete(String email, String subscribeId){
+            this.subscribeRepositories.deleteByEmailAndEmail(email, subscribeId);
+        }
+
+        public List<SubscribeDto> getAllSub(String email){
+            subscribeRepositories.f
         }
 
 
