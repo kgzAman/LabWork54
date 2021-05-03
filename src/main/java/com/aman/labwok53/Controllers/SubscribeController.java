@@ -65,7 +65,7 @@ public class SubscribeController {
 
     @GetMapping("/{email}")
     public List<SubscribeDto> getAllSubByEmail(@PathVariable String email){
-        return this.subscribeService.getAllSub(email)
+        return this.subscribeService.getAllSubByEmail(email)
                 .stream().map(Subscribe->modelMapper.map(Subscribe,SubscribeDto.class))
                 .collect(Collectors.toList());
     }
